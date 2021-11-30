@@ -1,15 +1,4 @@
-# HH-modeling
-
-
-Code and toy data to reproduce the results in *Hierarchical Dynamic Modeling for Individualized Bayesian Forecasting* (https://arxiv.org/abs/2101.03408).
-
-
-Modeling occurs at the following levels:
-- Return
-- Total Spend
-- Spend in Category
-- Spend in Subcategory
-- Item Quantity
+# Code and Simulated Data for Hierarchical Dynamic Modeling for Individualized Data
 
 ## Data
 
@@ -39,4 +28,3 @@ Simulated data for three household groups:
     - Metric functions for MAD, MAPE and ZAPE, calibration and coverage
     - Plotting functions for individual price sensitive households
 - ``HHsimultaneous.py``: simultaneous level modeling, starting from global level, p(Return), use mean or median point forecasts from higher levels in modeling hierarchy to condition out no returns and as covariates at lower levels of modeling 
-
