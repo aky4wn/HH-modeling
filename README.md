@@ -1,4 +1,15 @@
-# Code and Simulated Data for Hierarchical Dynamic Modeling for Individualized Data
+# HH-modeling
+
+
+Code and toy data to reproduce the results in *Hierarchical Dynamic Modeling for Individualized Bayesian Forecasting* (https://arxiv.org/abs/2101.03408).
+
+
+Modeling occurs at the following levels:
+- Return
+- Total Spend
+- Spend in Category
+- Spend in Subcategory
+- Item Quantity
 
 ## Data
 
