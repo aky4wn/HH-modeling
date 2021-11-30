@@ -326,19 +326,7 @@ def model_Cat(df_cat, df_global, hhg, cat, k, model):
         if not np.all(X == 0):
             try:
                 print("Modeling Now", X.shape)
-                # prior a0 = 0, R0 = I  
-                a0_dlm = np.zeros(X.shape[1] + 1)
-                R0_dlm = np.eye(X.shape[1] + 1)
-                a0_bern = np.zeros(X.shape[1] + 1)
-                R0_bern = np.eye(X.shape[1] + 1)
-                # model_prior = define_dlmm(Y, X, a0_dlm = a0_dlm, R0_dlm = R0_dlm,
-                #                             a0_bern = a0_bern, R0_bern = R0_bern,  
-                #                             ntrend = 1, nlf = 0, nhol = 0,
-                #                             n0_dlm = 1, s0_dlm = 1, n = None,
-                #                             seasPeriods = [],
-                #                             seasHarmComponents = [])    
-                # print(model_prior.dlm.R)
-                # print(model_prior.dlm.s)
+                
                 mod, samples = analysis_dlmm(Y, X, 
                                         forecast_start=forecast_start,      # First time step to forecast on
                                         forecast_end=forecast_end,          # Final time step to forecast on
@@ -352,23 +340,14 @@ def model_Cat(df_cat, df_global, hhg, cat, k, model):
                                         delVar_dlm = delVar_dlm,
                                         ret = ['model', 'forecast'],
                                         nsamps = 300) 
-                                        # model_prior = model_prior)
+                                        
 
                 dind = (forecast_end - forecast_start) + k
                 samp_list[count, :, :dind] = samples[:,:,0]
                 true_list[count, :dind] = Y[forecast_start:forecast_end+k].flatten()
                 print(true_list[count, :dind])
                     
-                # ## get m and v for the T distribution
-                # F = np.hstack((np.ones((X.shape[0], 1)), X))
-                # ft, qt = map(list,zip(*[mod.dlm_mod.get_mean_and_var(F[i,:], model_coef['a'][i,:], 
-                #                                             model_coef['R'][i,:, :]) for i in range(1,F.shape[0])]))
-
-                # tdist_list[count, 0, 1:dind] = np.array(ft)[forecast_start:forecast_end + k]
-                # if len(np.array(qt).shape) > 1:
-                #     tdist_list[count, 1, 1:dind] = np.array(qt)[forecast_start:forecast_end + k, 0, 0]
-                # else:
-                #     tdist_list[count, 1, 1:dind] = np.array(qt)[forecast_start:forecast_end + k]
+         
             except ValueError:
                 continue
             count += 1
@@ -380,10 +359,7 @@ def model_Cat(df_cat, df_global, hhg, cat, k, model):
     fname = 'simulated_results/Cat/HH-'+str(hhg)+'-CAT='+str(cat)+ \
                         '-k'+str(k) + '-m' + str(model) + '-samples.npy'    
     np.save(fname, samp_list)
-    
-    # fname = 'simulated_results/Cat/HH-'+str(hhg)+'-CAT='+str(cat)+'-k'+str(k) + \
-    #                                         '-m' + str(model) + '-Tparams.npy'    
-    # np.save(fname, tdist_list)
+   
     print('Done')
 #########################
 for hhg in [1,2,3]:
@@ -486,17 +462,7 @@ def model_SubCat(df_sub, df_cat, hhg, sub, k, model):
                 dind = (forecast_end - forecast_start) + k
                 samp_list[count, :, :dind] = samples[:,:,0]
                 true_list[count, :dind] = Y[forecast_start:forecast_end + k].flatten()
-                ## get m and v for the T distribution
-                # F = np.hstack((np.ones((X.shape[0], 1)), X))
-                # ft, qt = map(list,zip(*[mod.dlm_mod.get_mean_and_var(F[i,:], model_coef['a'][i,:], 
-                #                                             model_coef['R'][i,:, :]) for i in range(1,F.shape[0])]))
-
-                # tdist_list[count, 0, 1:dind] = np.array(ft)[forecast_start:forecast_end + k]
-                # if len(np.array(qt).shape) > 1:
-                #     tdist_list[count, 1, 1:dind] = np.array(qt)[forecast_start:forecast_end + k, 0, 0]
-                # else:
-                #     tdist_list[count, 1, 1:dind] = np.array(qt)[forecast_start:forecast_end + k]
-            # try:
+                
             except ValueError:
                 continue
             
@@ -512,9 +478,7 @@ def model_SubCat(df_sub, df_cat, hhg, sub, k, model):
                                 '-SUB_CAT='+str(sub)+'-k'+ str(k) + '-m' + str(model) + '-samples.npy'    
     np.save(fname, samp_list)
     
-    # fname = 'simulated_results/Sub_Cat/HH-'+str(hhg)+ \
-    #                                 '-SUB_CAT='+str(sub)+'-k'+ str(k) +'-m' + str(model) + '-Tparams.npy'    
-    # np.save(fname, tdist_list)
+    
     print('Done')
 #########################################################
 k = 1
