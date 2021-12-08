@@ -470,7 +470,7 @@ def ITEM_modeling(df_item, hhg, item, k, hh_list, flist_return, flist_spend, fli
                 try:
                     print("Modeling Now")
                     ## Now run with best discount factor
-                    mod, samples, model_coef = analysis_dcmm(Y, X, 
+                    mod, samples = analysis_dcmm(Y, X, 
                                             forecast_start=forecast_start,      # First time step to forecast on
                                             forecast_end=forecast_end,          # Final time step to forecast on
                                             k=k,                                # Forecast horizon. 
@@ -481,7 +481,7 @@ def ITEM_modeling(df_item, hhg, item, k, hh_list, flist_return, flist_spend, fli
                                             deltrend_pois = deltrend_pois, 
                                             delregn_pois = delregn_pois,               
                                             rho_pois = rho_pois,
-                                            ret = ['model', 'forecast', 'model_coef'],
+                                            ret = ['model', 'forecast'],
                                             nsamps = 300
                                             )
                     dind = (forecast_end - forecast_start) + k
