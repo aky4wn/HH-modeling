@@ -28,7 +28,7 @@ Simulated data for three household groups:
     - Category level: DLMM
     - Sub-Category level: DLMM
     - Item level and direct modeling: DCMM
-- ``HHanalysis.py``: script to analyze results of ``HHmodels.py`` for all modeling levels
+- ``HHanalysis.py``: helper functions to analyze results of ``HHmodels.py`` for all modeling levels
     - p(Return)
     - p(log total spend | Return)
     - Category level
@@ -37,5 +37,4 @@ Simulated data for three household groups:
     - Simultaneous modeling
     - Direct modeling
     - Metric functions for MAD, MAPE and ZAPE, calibration and coverage
-    - Plotting functions for individual price sensitive households
 - ``HHsimultaneous.py``: simultaneous level modeling, starting from global level, p(Return), use mean or median point forecasts from higher levels in modeling hierarchy to condition out no returns and as covariates at lower levels of modeling 
